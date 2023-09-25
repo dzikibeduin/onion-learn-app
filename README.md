@@ -5,13 +5,17 @@ node based app for:
 - learning how to node js work with typescript
 - learning how DDD works
 
-Todos module is simple TodoApp that allows user to create some of tasks.
-User can manage tasks, for example:
+pytania do Milczka:
 
-- create task
-- ...
+- co z infra / jak to rozwinąć?
+- jak połączyć te wszystkie kafelki do app.ts / server.ts?
+- czy potrzebuję folderu base - jak tak to jak rozwinąć?
+- gdzie umieścić folder prisma?
 
-Stories:
+todo:
 
-- user can create task
-- ...
+- połączenie z bazką
+- złączenie pierdolnika w app
+- testy
+- napisanie logiki usera
+- moduł platform access
