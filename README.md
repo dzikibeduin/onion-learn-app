@@ -14,7 +14,7 @@ pytania do Milczka:
 
 todo:
 
-- połączenie z bazką
+- połączenie z bazką - done
 - złączenie pierdolnika w app
 - testy
 - napisanie logiki usera
