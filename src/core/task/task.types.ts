@@ -24,4 +24,10 @@ export interface RawTask {
   title: string;
   description: string;
   status: TaskStatus;
+  author: RawAuthor;
+}
+
+export interface RawAuthor {
+  id: string;
+  email: string;
 }
