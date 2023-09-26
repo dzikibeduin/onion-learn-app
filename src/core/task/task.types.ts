@@ -5,12 +5,12 @@ export interface CreateTaskPayload {
 }
 
 export interface TaskProps {
-  authorId: string;
   title: string;
   description: string;
   createdAt: Date;
   updatedAt: Date;
   status: TaskStatus;
+  author: RawAuthor;
 }
 
 export enum TaskStatus {
@@ -23,6 +23,8 @@ export interface RawTask {
   id: string;
   title: string;
   description: string;
+  createdAt: Date;
+  updatedAt: Date;
   status: TaskStatus;
   author: RawAuthor;
 }

@@ -1,4 +1,4 @@
-import { CreateTaskPayload, TaskProps, TaskStatus } from "./task.types";
+import { CreateTaskPayload, RawTask, TaskProps, TaskStatus } from "./task.types";
 import { Entity } from "../../../base/entity";
 
 export class Task extends Entity<TaskProps> {
@@ -11,11 +11,37 @@ export class Task extends Entity<TaskProps> {
       {
         title,
         description,
-        authorId,
+        author: {id: authorId, email: ''},
         createdAt: new Date(),
         updatedAt: new Date(),
         status: TaskStatus.OPEN,
       }
     );
+  }
+
+  public static asObject({ id, author, createdAt, updatedAt, ...data }: RawTask) {
+    return new Task(
+      {
+        ...data,
+        author: {id: author.id, email: author.email},
+        createdAt: new Date(createdAt),
+        updatedAt: new Date(updatedAt),
+      },
+      id,
+    );
+  }
+
+
+  // todo: id should be present, add author entity
+  public toJson(): RawTask {
+    return {
+      id: this.id ? this.id : '', 
+      title: this.props.title,
+      description: this.props.description,
+      createdAt: this.props.createdAt,
+      updatedAt: this.props.updatedAt,
+      status: this.props.status,
+      author: {id: this.props.author.id, email: ''},
+    };
   }
 }

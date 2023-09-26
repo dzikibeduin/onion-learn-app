@@ -2,43 +2,41 @@ import { Task } from 'core/task/task.entity';
 import { TaskRepo } from '../../core/task/task.repo';
 import { PrismaClient } from '@prisma/client';
 
-interface Dependencies {}
-
-const prisma = new PrismaClient();
-
 export class PrismaTaskRepo implements TaskRepo {
 
-  constructor(private readonly dependencies: Dependencies) {}
+  private databaseConnection = new PrismaClient();
 
   public async findById(id: string): Promise<Task> {
-    const post = await prisma.post.findUnique({
+    const existingTask = await this.databaseConnection.task.findUnique({
       where: {
-        id,
+        id: Number(id),
       },
     });
 
+    if (!existingTask) {
+      throw new Error('Task not found');
+    }
+
     // todo: map to domain entity
-    return post;
+    return Task.asObject(JSON.parse(existingTask));
   }
 
   public async save(task: Task): Promise<void> {
-    await prisma.post.create({
+    const { id, ...data } = task.toJson();
+
+    await this.databaseConnection.task.create({
       data: {
-        title: task.title,
-        description: task.description,
-        authorId: task.authorId,
-        createdAt: task.createdAt,
-        updatedAt: task.updatedAt,
-        status: task.status,
+        id: Number(id)
+        // todo: map to prisma entity
       },
     });
   }
 
   public async findAll(): Promise<Task[]> {
-    const posts = await prisma.post.findMany();
+    const tasks = await this.databaseConnection.task.findMany();
 
     // todo: map to domain entities
-    return posts;
+    return tasks.map(Task.asObject);
   }
 
 }
