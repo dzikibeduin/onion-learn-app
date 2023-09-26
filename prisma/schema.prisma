@@ -11,12 +11,13 @@ datasource db {
 }
 
 model Task {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   title       String
   description String
-  author      User     @relation(fields: [authorId], references: [id])
+  status      TaskStatus @default(OPEN)
+  author      User       @relation(fields: [authorId], references: [id])
   authorId    Int
 }
 

@@ -1,6 +1,7 @@
 import { Task } from 'core/task/task.entity';
 import { TaskRepo } from '../../core/task/task.repo';
 import { PrismaClient } from '@prisma/client';
+import { RawTask } from 'core/task/task.types';
 
 export class PrismaTaskRepo implements TaskRepo {
 
@@ -13,12 +14,7 @@ export class PrismaTaskRepo implements TaskRepo {
       },
     });
 
-    if (!existingTask) {
-      throw new Error('Task not found');
-    }
-
-    // todo: map to domain entity
-    return Task.asObject(JSON.parse(existingTask));
+    return Task.asObject(JSON.parse(JSON.stringify(existingTask)) as RawTask);
   }
 
   public async save(task: Task): Promise<void> {
@@ -26,8 +22,13 @@ export class PrismaTaskRepo implements TaskRepo {
 
     await this.databaseConnection.task.create({
       data: {
-        id: Number(id)
-        // todo: map to prisma entity
+        id: Number(id), 
+        title: data.title,
+        description: data.description,
+        createdAt: data.createdAt,
+        updatedAt: data.updatedAt,
+        authorId: Number(data.author.id),
+        status: data.status,
       },
     });
   }
@@ -35,8 +36,11 @@ export class PrismaTaskRepo implements TaskRepo {
   public async findAll(): Promise<Task[]> {
     const tasks = await this.databaseConnection.task.findMany();
 
-    // todo: map to domain entities
-    return tasks.map(Task.asObject);
+    const promisingTasks = await Promise.all(tasks.map(async (task) => {
+      return await Task.asObject(JSON.parse(JSON.stringify(task)) as RawTask);
+    }));
+
+    return promisingTasks;
   }
 
 }
