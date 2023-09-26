@@ -1,3 +1,3 @@
 export interface CommandBus {
-  execute(command: {payload: any}): Promise<unknown>;
+  execute(command: any): Promise<unknown>;
 }
