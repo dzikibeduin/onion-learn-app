@@ -1,4 +1,4 @@
-import { BusinessRole } from "./business-role";
+import { BusinessRule } from "./business-rule";
 
 export abstract class Entity<T> {
   constructor(
@@ -6,7 +6,7 @@ export abstract class Entity<T> {
     protected readonly id: string | null
   ) {}
 
-  protected static validate(rule: BusinessRole): void {
+  protected static validate(rule: BusinessRule): void {
     if (rule.isBroken()) {
       throw new Error(rule.message);
     }

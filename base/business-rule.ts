@@ -1,4 +1,4 @@
-export interface BusinessRole {
+export interface BusinessRule {
   message: string;
 
   isBroken(): boolean;

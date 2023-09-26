@@ -1,5 +1,6 @@
 import { CreateTaskPayload, RawTask, TaskProps, TaskStatus } from "./task.types";
 import { Entity } from "../../../base/entity";
+import { TaskTitleMustBeValidRule } from "./rules/task-title-must-be-valid.rule";
 
 export class Task extends Entity<TaskProps> {
   private constructor(props: TaskProps, id?: string) {
@@ -7,6 +8,9 @@ export class Task extends Entity<TaskProps> {
   }
 
   public static create({ authorId, title, description }: CreateTaskPayload)  {
+
+    Task.validate(new TaskTitleMustBeValidRule(title));
+
     return new Task(
       {
         title,
