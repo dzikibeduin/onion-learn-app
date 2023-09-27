@@ -1,4 +1,4 @@
-import { CreateTaskCommand } from 'app/commands/create-task/create-task.command';
+import { CreateTaskCommand } from '../../../app/commands/create-task/create-task.command';
 import { CommandBus } from '../../../../base/command-bus';
 import { RequestHandler } from 'express';
 
@@ -6,7 +6,7 @@ interface Dependencies {
   commandBus: CommandBus;
 }
 
-const createNewTaskAction = 
+const createNewTaskAction =
   ({ commandBus }: Dependencies): RequestHandler =>
   (req, res, next) =>
     commandBus

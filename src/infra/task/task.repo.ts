@@ -4,7 +4,6 @@ import { PrismaClient } from '@prisma/client';
 import { RawTask } from 'core/task/task.types';
 
 export class PrismaTaskRepo implements TaskRepo {
-
   private databaseConnection = new PrismaClient();
 
   public async findById(id: string): Promise<Task> {
@@ -22,7 +21,7 @@ export class PrismaTaskRepo implements TaskRepo {
 
     await this.databaseConnection.task.create({
       data: {
-        id: Number(id), 
+        id: Number(id),
         title: data.title,
         description: data.description,
         createdAt: data.createdAt,
@@ -36,11 +35,12 @@ export class PrismaTaskRepo implements TaskRepo {
   public async findAll(): Promise<Task[]> {
     const tasks = await this.databaseConnection.task.findMany();
 
-    const promisingTasks = await Promise.all(tasks.map(async (task) => {
-      return await Task.asObject(JSON.parse(JSON.stringify(task)) as RawTask);
-    }));
+    const promisingTasks = await Promise.all(
+      tasks.map(async (task) => {
+        return await Task.asObject(JSON.parse(JSON.stringify(task)) as RawTask);
+      }),
+    );
 
     return promisingTasks;
   }
-
 }

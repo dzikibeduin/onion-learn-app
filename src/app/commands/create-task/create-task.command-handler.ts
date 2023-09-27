@@ -1,7 +1,7 @@
-import { TaskRepo } from "core/task/task.repo";
-import { TaskStatus } from "core/task/task.types";
-import { CreateTaskCommand } from "./create-task.command";
-import { Task } from "core/task/task.entity";
+import { TaskRepo } from 'core/task/task.repo';
+import { TaskStatus } from 'core/task/task.types';
+import { CreateTaskCommand } from './create-task.command';
+import { Task } from 'core/task/task.entity';
 
 interface Dependencies {
   taskRepository: TaskRepo;
@@ -27,7 +27,7 @@ export class CreateTaskCommandHandler {
     const task = await Task.create(taskProps);
 
     await this.taskRepository.save(task);
-    
+
     return task;
   }
 }
