@@ -19,3 +19,4 @@ todo:
 - testy
 - napisanie logiki usera
 - moduł platform access
+- dodanie dockerfile pod bazke
