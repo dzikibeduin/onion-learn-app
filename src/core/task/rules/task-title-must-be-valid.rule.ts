@@ -1,4 +1,4 @@
-import { BusinessRule } from '../../../../base/business-rule';
+import { BusinessRule } from '../../../base/business-rule';
 
 export class TaskTitleMustBeValidRule implements BusinessRule {
   constructor(private readonly title: string) {}

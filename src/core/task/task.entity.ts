@@ -1,5 +1,5 @@
 import { CreateTaskPayload, RawTask, TaskProps, TaskStatus } from './task.types';
-import { Entity } from '../../../base/entity';
+import { Entity } from '../../base/entity';
 import { TaskTitleMustBeValidRule } from './rules/task-title-must-be-valid.rule';
 
 export class Task extends Entity<TaskProps> {

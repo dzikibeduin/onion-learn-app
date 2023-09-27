@@ -1,5 +1,5 @@
 import { CreateTaskCommand } from '../../../app/commands/create-task/create-task.command';
-import { CommandBus } from '../../../../base/command-bus';
+import { CommandBus } from '../../../base/command-bus';
 import { RequestHandler } from 'express';
 
 interface Dependencies {

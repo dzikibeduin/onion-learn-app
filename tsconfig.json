@@ -1,5 +1,5 @@
 {
-  "include": ["src", "base"],
+  "include": ["src", "src/base"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 

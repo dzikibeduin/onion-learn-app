@@ -1,9 +1,9 @@
-import { BusinessRule } from "./business-rule";
+import { BusinessRule } from './business-rule';
 
 export abstract class Entity<T> {
   constructor(
-    protected readonly props: T, 
-    protected readonly id: string | null
+    protected readonly props: T,
+    protected readonly id: string | null,
   ) {}
 
   protected static validate(rule: BusinessRule): void {
@@ -15,7 +15,7 @@ export abstract class Entity<T> {
   public equals(object: Entity<T>): boolean {
     if (object == null || object == undefined) {
       return false;
-    } 
+    }
     return this.id === object.id;
   }
 }
