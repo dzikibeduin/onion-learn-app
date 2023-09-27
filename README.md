@@ -15,7 +15,7 @@ pytania do Milczka:
 todo:
 
 - połączenie z bazką - done
-- złączenie pierdolnika w app
+- złączenie pierdolnika w app - dziala, ale musze poprawic kontrolery
 - testy
 - napisanie logiki usera
 - moduł platform access
